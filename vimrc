@@ -119,6 +119,7 @@ Plug 'APZelos/blamer.nvim'
 Plug 'bronson/vim-trailing-whitespace'
 call plug#end()
 
+let g:everforest_transparent_background=2
 let g:everforest_background = 'soft'
 colorscheme everforest
 
