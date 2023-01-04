@@ -80,15 +80,16 @@ nmap <S-Right> <Plug>AirlineSelectNextTab
 "" fzf.vim
 " Ctrl+pでファイル検索を開く
 " git管理されていれば:GFiles、そうでなければ:Filesを実行する
-fun! FzfOmniFiles()
-  let is_git = system('git status')
-  if v:shell_error
-    :Files
-  else
-    :GFiles
-  endif
-endfun
-nnoremap <C-p> :call FzfOmniFiles()<CR>
+"fun! FzfOmniFiles()
+"  let is_git = system('git status')
+"  if v:shell_error
+"    :Files
+"  else
+"    :GFiles
+"  endif
+"endfun
+"nnoremap <C-p> :call FzfOmniFiles()<CR>
+nnoremap <C-p> :Files<CR>
 nnoremap <C-e> :History<CR>
 
 " Ctrl+gで文字列検索を開く
@@ -100,6 +101,10 @@ command! -bang -nargs=* Rg
 \ : fzf#vim#with_preview({'options': '--exact --delimiter : --nth 3..'}, 'right:50%:hidden', '?'),
 \ <bang>0)
 nnoremap <C-g> :Rg<CR>
+
+" javascript
+set re=0
+let g:vim_jsx_pretty_colorful_config = 1
 
 call plug#begin()
 Plug 'prabirshrestha/vim-lsp'
@@ -114,14 +119,16 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'kassio/neoterm'
 Plug 'cohama/lexima.vim'
-Plug 'sainnhe/everforest'
+"Plug 'sainnhe/everforest'
+"Plug 'morhetz/gruvbox'
+Plug 'doums/darcula'
 Plug 'APZelos/blamer.nvim'
 Plug 'bronson/vim-trailing-whitespace'
+Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'yuezk/vim-js'
 call plug#end()
 
-let g:everforest_transparent_background=2
-let g:everforest_background = 'soft'
-colorscheme everforest
+colorscheme darcula
 
 " vim透過
 augroup TransparentBG
