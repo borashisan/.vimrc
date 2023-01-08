@@ -32,33 +32,66 @@ set ttyfast
 nnoremap <C-n> :Fern . -reveal=% -drawer -toggle -width=40<CR>
 let g:fern#default_hidden=1
 
+" coc
+noremap <C-t> <C-o>
+nmap <silent> <C-]> <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+" for 0.0.82
+" leximaのsettingだがcocとバッティングするのでdisableする
+let g:lexima_no_default_rules = 1
+"call lexima#set_default_rules()
+"call lexima#insmode#map_hook('before', '<CR>', '')
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
 
 "vim lsp
-if executable('solargraph')
-  augroup LspRuby
-    au!
-    autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'solargraph',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-        \ 'whitelist': ['ruby'],
-        \ })
-    autocmd FileType ruby setlocal omnifunc=lsp#complete
-  augroup END
-endif
-
-nnoremap <expr> <C-]> execute('LspPeekDefinition') =~ "not supported" ? "\<C-]>" : ":LspDefinition<cr>"
-nmap <silent> gr <plug>(lsp-references)
-
-let g:lsp_diagnostics_enabled=1
-
-let g:lsp_diagnostics_echo_cursor=1
-
-let g:lsp_diagnostics_float_cursor=1
-
-let g:lsp_diagnostics_virtual_text_enabled=0
+"if executable('solargraph')
+"  augroup LspRuby
+"    au!
+"    autocmd User lsp_setup call lsp#register_server({
+"        \ 'name': 'solargraph',
+"        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+"        \ 'whitelist': ['ruby'],
+"        \ })
+"    autocmd FileType ruby setlocal omnifunc=lsp#complete
+"  augroup END
+"endif
+"
+"nnoremap <expr> <C-]> execute('LspPeekDefinition') =~ "not supported" ? "\<C-]>" : ":LspDefinition<cr>"
+"nmap <silent> gr <plug>(lsp-references)
+"
+"let g:lsp_diagnostics_enabled=1
+"
+"let g:lsp_diagnostics_echo_cursor=1
+"
+"let g:lsp_diagnostics_float_cursor=1
+"
+"let g:lsp_diagnostics_virtual_text_enabled=0
 
 "asyncomplete
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+"emmet-vim
+let g:user_emmet_settings = {
+\  'variables' : {
+\    'lang' : "ja"
+\  },
+\  'indentation' : '  ',
+\  'html' : {
+\    'snippets' : {
+\      'html:5': "<!DOCTYPE html>\n"
+\        ."<html lang=\"${lang}\">\n"
+\        ."<head>\n"
+\        ."\t<meta charset=\"${charset}\" \/>\n"
+\        ."\t<link rel=\"stylesheet\" href=\"\" \/>\n"
+\        ."\t<meta name=\"description\" content=\"\" \/>\n"
+\        ."\t<title></title>\n"
+\        ."</head>\n"
+\        ."<body>\n\t${child}|\n\t<script type=\"text/javascript\" src=\"\"></script>\n</body>\n"
+\        ."</html>",
+\    }
+\  }
+\}
 
 " neoterm
 nnoremap <S-T> :Ttoggle<CR>
@@ -107,10 +140,11 @@ set re=0
 let g:vim_jsx_pretty_colorful_config = 1
 
 call plug#begin()
-Plug 'prabirshrestha/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
+"Plug 'prabirshrestha/vim-lsp'
+"Plug 'mattn/vim-lsp-settings'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'prabirshrestha/asyncomplete.vim'
+"Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'lambdalisue/fern.vim'
 Plug 'lambdalisue/fern-hijack.vim'
 Plug 'vim-airline/vim-airline'
@@ -119,13 +153,12 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'kassio/neoterm'
 Plug 'cohama/lexima.vim'
-"Plug 'sainnhe/everforest'
-"Plug 'morhetz/gruvbox'
 Plug 'doums/darcula'
 Plug 'APZelos/blamer.nvim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'yuezk/vim-js'
+Plug 'mattn/emmet-vim'
 call plug#end()
 
 colorscheme darcula
