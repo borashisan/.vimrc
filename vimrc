@@ -36,13 +36,6 @@ let g:fern#default_hidden=1
 noremap <C-t> <C-o>
 nmap <silent> <C-]> <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
-" for 0.0.82
-" leximaのsettingだがcocとバッティングするのでdisableする
-let g:lexima_no_default_rules = 1
-"call lexima#set_default_rules()
-"call lexima#insmode#map_hook('before', '<CR>', '')
-inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-
 
 "vim lsp
 "if executable('solargraph')
@@ -160,6 +153,13 @@ Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'yuezk/vim-js'
 Plug 'mattn/emmet-vim'
 call plug#end()
+
+"coc for 0.0.82
+" leximaのsettingだがcocとバッティングするのでdisableする
+let g:lexima_no_default_rules = 1
+call lexima#set_default_rules()
+call lexima#insmode#map_hook('before', '<CR>', '')
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 colorscheme darcula
 
