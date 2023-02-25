@@ -1,5 +1,5 @@
 {
-  "eslint.autoFixOnSave": true,
+  "eslint.autoFixOnSave": false,
   "eslint.filetype": [
     "javascript",
     "javascriptreact",
@@ -11,6 +11,8 @@
     "javascript",
     "javascriptreact",
     "typescript",
-    "typescriptreact"
+    "typescriptreact",
+    "json",
+    "ruby"
   ]
 }
