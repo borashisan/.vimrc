@@ -8,11 +8,11 @@
   ],
   "coc.preferences.formatOnSaveFiletypes": [
     "go",
+    "rust",
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact",
-    "json",
-    "ruby"
+    "json"
   ]
 }
