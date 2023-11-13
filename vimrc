@@ -27,6 +27,7 @@ let &t_EI = "\e[1 q"
 set ttimeout
 set ttimeoutlen=1
 set ttyfast
+set backspace=indent,eol,start
 
 "Fern
 nnoremap <C-n> :Fern . -reveal=% -drawer -toggle -width=40<CR>
